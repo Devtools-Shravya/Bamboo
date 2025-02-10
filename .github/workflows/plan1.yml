@@ -1,0 +1,15 @@
+name: project1/plan1
+on:
+#   # This item has no matching transformer
+#   bitbucket-server-trigger: {}
+jobs:
+  Default-Stage-Default-Job:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4.1.0
+      with:
+        clean: false
+    - name: Create branch branch_${{ github.workflow }}-${{ github.job }}-${{ github.run_id }}
+      run: |
+        git checkout -b branch_${{ github.workflow }}-${{ github.job }}-${{ github.run_id }}
+        git push --set-upstream origin branch_${{ github.workflow }}-${{ github.job }}-${{ github.run_id }}
